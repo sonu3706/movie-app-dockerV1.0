@@ -1,0 +1,27 @@
+version: '3'
+services:
+  movie-app:
+    image: movie-app
+    build: MovieCruiserServer/
+    restart: always
+    network_mode: host
+    ports:
+      - 8080:8080
+    expose:
+      - 8080  
+    depends_on:
+      - movie-mysql
+
+  movie-mysql:
+    image: mysql:latest
+    restart: always
+    network_mode: host
+    expose:
+      - 3306
+    ports:
+      - 3306:3306  
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_USER: sonu
+      MYSQL_PASSWORD: sonu123
+      MYSQL_DATABASE: sonuDb
